@@ -3,6 +3,7 @@
 using namespace std;
 
 #define ll long long
+#define ull unsigned ll
 #define psh push_back
 
 
