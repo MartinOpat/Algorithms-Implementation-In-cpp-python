@@ -9,6 +9,7 @@ The project consists of:
     - Algorithms
         - Kruskal's algorithm
         - DFS graph cycle remove
+        - Binary Search
     
     - Data strucures
         - Disjoint set 
