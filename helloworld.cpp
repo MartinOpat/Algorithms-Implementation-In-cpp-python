@@ -6,6 +6,8 @@ using namespace std;
 #define ull unsigned ll
 #define psh push_back
 
+ll mod = 1000000007;
+
 
 int main() {
 
