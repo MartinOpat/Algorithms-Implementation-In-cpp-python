@@ -10,6 +10,7 @@ The project consists of:
         - Kruskal's algorithm
         - DFS graph cycle remove
         - Binary Search
+        - Floodfill (BFS)
     
     - Data strucures
         - Disjoint set 
