@@ -29,7 +29,7 @@ def bfs(roots, ans):
     explored = set(roots)
 
     while len(q) != 0:
-        v = q.pop()
+        v = q.popleft()
         i, j = v
         # print(i, j)
         # grid[i][j] = 5

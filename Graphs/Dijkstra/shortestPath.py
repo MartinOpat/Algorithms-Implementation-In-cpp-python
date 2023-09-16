@@ -19,30 +19,27 @@ while line != "0 0 0 0":
     pq = [(0, s)]
     heapify(pq)
     visited = set([])
-    # for v in range(n):
-    #     pq.append((dist[v], v))
-    # heapify(pq)
 
     while len(pq) != 0:
-        _, u = pq.pop()
-        # print(dist)
-        # print(u)
+        _, u = heappop(pq)
 
+        # To avoid having to delete element from pq
         if u in visited:
             continue
         visited.add(u)
 
+        # In case of disconnected graphs
+        if u not in g:
+            continue
+
         for w, v in g[u]:
-            w = -w
             alt = dist[u] + w
             # print(v, alt)
             if alt < dist[v]:
                 dist[v] = alt
                 prev[v] = u
-                pq.append((-alt, v))
-        # print()
+                heappush(pq, (alt, v))
 
-    # print(dist)
     for _ in range(q):
         task = int(input())
         print(dist[task] if dist[task] < float("inf") else "Impossible")
