@@ -16,7 +16,21 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(NULL);
 
-    cout << "Hello World!";
+    vector<int> test = {1, 2, 3, 4, 5};
+    PRINT_VEC(test);
+
+    // int c, n;
+    // while (cin >> c >> n) {
+    //     vector<pair<int, int>> objs;
+
+    //     for (int i = 0; i < n; i++) {
+    //         cin >> objs[i].first;
+    //         cin >> objs[i].second;
+    //     }
+        
+
+
+    // }
 
     return 0;
 }
