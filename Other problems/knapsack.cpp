@@ -14,7 +14,7 @@ ll mod = 1000000007;
 int max(int a, int b) { return (a > b) ? a : b; }
 
 // Prints the items which are put in a knapsack of capacity W
-void printknapSack(int W, int wt[], int val[], int n) {
+void printknapSack(int W, int wt[], int val[], int n,  set<int>& ans) {
 	int i, w;
 	int K[n + 1][W + 1];
 
@@ -34,7 +34,7 @@ void printknapSack(int W, int wt[], int val[], int n) {
 
 	// stores the result of Knapsack
 	int res = K[n][W];
-	cout << res << endl;
+    // cout<< res << endl;
 
 	w = W;
 	for (i = n; i > 0 && res > 0; i--) {
@@ -47,7 +47,8 @@ void printknapSack(int W, int wt[], int val[], int n) {
 			continue;
 		else {
 			// This item is included.
-			cout << " " << wt[i - 1];
+			// cout << " " << wt[i - 1];
+			ans.insert(i-1);
 
 			// Since this weight is included its
 			// value is deducted
@@ -67,10 +68,26 @@ int main() {
 		for (int i = 0; i < n; i++) {
 			cin >> vals[i] >> weights[i];
 		}
+		
+		set<int> ans = {};
+		printknapSack(c, weights, vals, n, ans);
 
-		for (auto x: vals)
-		cout << endl;
-		printknapSack(c, weights, vals, n);
+		cout << ans.size() << endl;
+		bool first = true;
+
+		// Iterate through the set and print each element separated by a space
+		for (const int& element : ans) {
+			// Check if it's the first element
+			if (first) {
+				first = false;
+			} else {
+				std::cout << " ";
+			}
+			std::cout << element;
+		}
+
+		// Print a newline character at the end for formatting
+		std::cout << std::endl;
 	}
 
 	return 0;

@@ -14,7 +14,6 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(NULL);
 
-    vector<int> test = {1, 2, 3};
     cout << "Hello World!" << endl;
 
     return 0;
