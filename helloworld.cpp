@@ -6,7 +6,7 @@ using namespace std;
 #define ull unsigned ll
 #define psh push_back
 
-ll mod = 1000000007;
+const ll MOD = 1000000007ll;  // 10e9+7
 
 
 int main() {
