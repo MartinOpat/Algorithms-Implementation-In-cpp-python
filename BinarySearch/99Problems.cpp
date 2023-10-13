@@ -15,69 +15,58 @@ int main() {
     cin.tie(NULL);
 
     int n, q;
-    vector<int> ds;
+    map<int, int> ds;
 
     cin >> n >> q;
     for (int i = 0; i < n; i++) {
         int x;
         cin >> x;
-        ds.psh(x);
-    }
 
-    sort(ds.begin(), ds.end());
-
-    vector<int> ds_set = {ds[0]};
-    vector<int> ds_count = {1};
-
-    for (int i = 1; i < n; i++) {
-        if (ds[i] == ds[i - 1]) {
-            ds_count[ds_count.size() - 1]++;
+        if (ds.find(x) == ds.end()) {
+            ds[x] = 1;
         } else {
-            ds_set.psh(ds[i]);
-            ds_count.psh(1);
+            ds[x]++;
         }
     }
 
     int t, d;
     for (int i = 0; i < q; i++) {
         cin >> t >> d;
-        if (ds_set.size() == 0) {
+        if (ds.size() == 0) {
             cout << -1 << endl;
             continue;
         }
 
-        // auto it = ds_set.lower_bound(d);
-        auto it = lower_bound(ds_set.begin(), ds_set.end(), d);
+        auto it = ds.lower_bound(d);
         if (t == 1) {
-            if (d >= ds_set[ds_set.size()-1]) {
+            if (d >= (*prev(ds.end())).first) {
                 cout << -1 << endl;
                 continue;
             }
-
-            if (*it == d) {
-                it++;
+            if ((*it).first == d) {
+                it = next(it);
             }
         } else {
-            if (ds_set[0] > d) {
+            if ((*ds.begin()).first > d) {
                 cout << -1 << endl;
                 continue;
             }
 
-            if (it == ds_set.end()) {
-                it--;   
+            if (it == ds.end()) {
+                it = prev(it);
             }
 
-            if (*it > d) {
-                it--;
+            if ((*it).first > d) {
+                it = prev(it);
             }            
         }
-        cout << *it << endl;
+        cout << (*it).first << endl;
 
-        if (ds_count[it - ds_set.begin()] > 1) {
-            ds_count[it - ds_set.begin()]--;
+        if (ds[(*it).first] > 1) {
+            ds[(*it).first]--;
         } else {
-            ds_set.erase(it);
-            ds_count.erase(ds_count.begin() + (it - ds_set.begin()));
+            ds.erase(it);
+            // ds_count.erase(ds_count.begin() + (it - ds_set.begin()));
         }
     }
     return 0;
