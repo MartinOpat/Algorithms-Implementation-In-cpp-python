@@ -24,39 +24,35 @@ int main() {
 	vector<vector<ll>> dp(n, vector<ll>(n, NEG_INF));
 
 	// init first column
-    vector<ll> maxEls(n, NEG_INF);
+	vector<ll> maxEls(n, NEG_INF);
 	for (ll i = 0; i < n; i++) {
 		dp[i][0] = ps[0];
 	}
-    maxEls[0] = ps[0];
+	maxEls[0] = ps[0];
 
 	for (ll i = n - 1; i >= 0; i--) {
-		for (ll j = i+1; j < n; j++) {
-			// ll jumpFrom = NEG_INF;
-			// for (ll k = i; k < n; k++) {
-			// 	jumpFrom = max(jumpFrom, dp[k][j-(i+1)]);
-			// }
-
-            if (maxEls[j-(i+1)] > NEG_INF) {
-			    dp[i][j] = ps[j] + maxEls[j-(i+1)];
-                maxEls[j] = max(maxEls[j], dp[i][j]);
-            }
+		for (ll j = i + 1; j < n; j++) {
+			if (maxEls[j - (i + 1)] > NEG_INF) {
+				dp[i][j] = ps[j] + maxEls[j - (i + 1)];
+				maxEls[j] = max(maxEls[j], dp[i][j]);
+			}
 		}
 	}
 
-	ll ans = dp[0][n - 1];
-	for (ll i = 1; i < n; i++) {
-		ans = max(ans, dp[i][n - 1]);
-	}
-
-	// for (auto x : dp) {
-	// 	for (auto y : x) {
+	// cout << endl;
+	// for (auto x: dp) {
+	// 	for (auto y: x) {
 	// 		cout << y << " ";
 	// 	}
 	// 	cout << endl;
 	// }
 
-	cout << ans << endl;
+	// ll ans = dp[0][n - 1];
+	// for (ll i = 1; i < n; i++) {
+	// 	ans = max(ans, dp[i][n - 1]);
+	// }
+
+	cout << maxEls[n-1] << endl;
 
 	return 0;
 }
