@@ -32,7 +32,7 @@ int main() {
 
 	for (ll i = n - 1; i >= 0; i--) {
 		for (ll j = i + 1; j < n; j++) {
-			if (maxEls[j - (i + 1)] > NEG_INF) {
+			if (maxEls[j - (i + 1)] > NEG_INF and 1) {
 				dp[i][j] = ps[j] + maxEls[j - (i + 1)];
 				maxEls[j] = max(maxEls[j], dp[i][j]);
 			}
