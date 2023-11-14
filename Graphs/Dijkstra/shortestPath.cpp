@@ -10,6 +10,33 @@ ll mod = 1000000007;
 int inf = 1e9;
 
 
+vector<int> dijkstra(int n, int root, map<int, vector<pair<int, int>>>& g) {
+	set<int> visited;
+	vector<int> dist(n, inf);
+    dist[root] = 0;
+    priority_queue<pair<int, int>> pq;
+    pq.push({0, root});
+    while (!pq.empty()) {
+        int node = pq.top().second;
+        int d = -pq.top().first;
+        pq.pop();
+
+        if (visited.find(node) != visited.end()) continue;
+        visited.insert(node);
+
+        for (auto e : g[node]) {
+            int neigh = e.first;
+            int cost = e.second;
+            if (dist[neigh] > dist[node] + cost) {
+                dist[neigh] = dist[node] + cost;
+                pq.push({-dist[neigh], neigh});
+            }
+        }
+    }
+    return dist;
+}
+
+
 int main() {
 
     ios::sync_with_stdio(false);
@@ -25,11 +52,6 @@ int main() {
             g[u].psh({v, w});
         }
 
-        vector<int> dist(n, inf);
-        dist[s] = 0;
-        priority_queue<pair<int, int>> pq;
-        pq.push({0, s});
-
         set<int> queries;
         vector<int> queries_help;
         int q_help = 0;
@@ -39,31 +61,11 @@ int main() {
             queries.insert(v);
             queries_help.psh(v);
             q_help++;
-            // if (dist[v] == inf) cout << "Impossible" << endl;
-            // else cout << dist[v] << endl;
+
         }
 
-        set<int> visited;
-        while (!pq.empty() && !queries.empty()) {
-            int u = pq.top().second;
-            int d = -pq.top().first;
-            pq.pop();
-
-            if (visited.find(u) != visited.end()) continue;
-
-            queries.erase(u);
-            visited.insert(u);
-
-            for (auto e : g[u]) {
-                int v = e.first;
-                int w = e.second;
-                if (dist[v] > dist[u] + w) {
-                    dist[v] = dist[u] + w;
-                    pq.push({-dist[v], v});
-                }
-            }
-        }
-
+        
+		vector<int> dist = dijkstra(n, s, g);
         for (auto query: queries_help) {
             if (dist[query] == inf) cout << "Impossible" << endl;
             else cout << dist[query] << endl;
