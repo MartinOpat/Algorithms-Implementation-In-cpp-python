@@ -11,6 +11,7 @@ The project consists of:
         - DFS graph cycle remove
         - Binary Search
         - Floodfill (BFS)
+        - Ford Fulkerson flow algorithm
     
     - Data strucures
         - Disjoint set 
